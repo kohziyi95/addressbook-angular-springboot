@@ -10,10 +10,13 @@ export class AppComponent {
 
   hiddenComponent: string = 'form';
 
-  toggleComponent() {
-    this.hiddenComponent == 'form'
-      ? (this.hiddenComponent = 'list')
-      : (this.hiddenComponent = 'form');
+  toggleFormComponent() {
+    this.hiddenComponent ='form';
+    console.info('current component: ', this.hiddenComponent);
+  }
+
+  toggleListComponent() {
+    this.hiddenComponent = 'list';
     console.info('current component: ', this.hiddenComponent);
   }
 }

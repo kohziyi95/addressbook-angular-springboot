@@ -27,7 +27,7 @@ export class ContactFormComponent implements OnInit {
       ]),
       mobile: this.fb.control<any>('', [
         Validators.required,
-        Validators.pattern("[0-9]*"),
+        Validators.pattern('[0-9]*'),
         Validators.minLength(8),
         Validators.maxLength(8),
       ]),
@@ -35,7 +35,7 @@ export class ContactFormComponent implements OnInit {
   }
 
   processForm() {
-    console.info("Submitting Contact Form >>>>> ", this.contactForm.value);
+    console.info('Submitting Contact Form >>>>> ', this.contactForm.value);
     this.contactForm = this.createForm();
   }
 
@@ -43,7 +43,19 @@ export class ContactFormComponent implements OnInit {
     return this.contactForm.get(controlName)?.hasError('required');
   }
 
+  hasEmailError(controlName: string): boolean | undefined {
+    return this.contactForm.get(controlName)?.hasError('email');
+  }
+
   hasMobileError(controlName: string): boolean | undefined {
-    return this.contactForm.get(controlName)?.hasError('pattern');
+    return (
+      this.contactForm.get(controlName)?.hasError('pattern') ||
+      this.contactForm.get(controlName)?.errors?.['minlength'] ||
+      this.contactForm.get(controlName)?.errors?.['maxlength']
+    );
+  }
+
+  isDirty(controlName: string): boolean | undefined {
+    return this.contactForm.get(controlName)?.dirty;
   }
 }

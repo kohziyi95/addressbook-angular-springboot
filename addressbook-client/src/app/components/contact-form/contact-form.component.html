@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="row align-items-center">
-    <div class="col-6 card">
+  <div class="row d-flex flex-row justify-content-center">
+    <div class="col-8 card">
       <div class="card-body">
         <h5 class="card-title">Add a Contact</h5>
         <form [formGroup]="contactForm" (ngSubmit)="processForm()">
@@ -16,9 +16,10 @@
                   formControlName="name"
                 />
               </td>
-              <span *ngIf="hasError('name') && contactForm.dirty">
-                Please input a name.
-              </span>
+            </tr>
+            <tr *ngIf="hasError('name') && isDirty('name')">
+              <td></td>
+              <td>Please input a name.</td>
             </tr>
             <tr>
               <td><label for="email">Email:</label></td>
@@ -29,11 +30,14 @@
                   formControlName="email"
                 />
               </td>
-              <td>
-                <span *ngIf="hasError('email') && contactForm.dirty">
-                  Please input a valid email.
-                </span>
-              </td>
+            </tr>
+            <tr *ngIf="hasError('email') && isDirty('email')">
+              <td></td>
+              <td>Please input a email.</td>
+            </tr>
+            <tr *ngIf="hasEmailError('email') && isDirty('email')">
+              <td></td>
+              <td>Please input a valid email.</td>
             </tr>
             <tr>
               <td><label for="mobile">Mobile:</label></td>
@@ -44,14 +48,14 @@
                   formControlName="mobile"
                 />
               </td>
-              <td>
-                <span *ngIf="hasError('mobile') && contactForm.dirty">
-                  Please input a mobile number.
-                </span>
-                <span *ngIf="hasMobileError('mobile') && contactForm.dirty">
-                  Please input a valid mobile number.
-                </span>
-              </td>
+            </tr>
+            <tr *ngIf="hasError('mobile') && isDirty('mmbile')">
+              <td></td>
+              <td>Please input a mobile number.</td>
+            </tr>
+            <tr *ngIf="hasMobileError('mobile') && isDirty('mobile')">
+              <td></td>
+              <td>Please input a valid mobile number.</td>
             </tr>
             <tr>
               <td></td>

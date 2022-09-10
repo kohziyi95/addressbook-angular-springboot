@@ -1,15 +1,22 @@
 <div class="container">
-  <div class="display-3">Address Book</div>
-  <div class="row">
-    <div class="col">
-      <button class="btn btn-primary" type="button" (click)="toggleComponent()">Add</button>
-      <button class="btn btn-primary" type="button" (click)="toggleComponent()">List</button>
+  <div class="display-3 text-center m-4">Address Book</div>
+  <div class="d-flex flex-row justify-content-center row mt-3">
+    <!-- <div class="col-2"></div> -->
+    <div class="col-3">
+      <button class="btn btn-primary w-100" type="button" (click)="toggleFormComponent()">
+        Add
+      </button>
+    </div>
+    <div class="col-3">
+      <button class="btn btn-primary w-100" type="button" (click)="toggleListComponent()">
+        List
+      </button>
     </div>
   </div>
-  <div class="row">
+  <div class="row mt-3">
     <div class="col">
-      <app-contact-form [hidden]="hiddenComponent=='list'"></app-contact-form>
-      <app-contact-list [hidden]="hiddenComponent=='form'"></app-contact-list>
+      <app-contact-form [hidden]="hiddenComponent == 'list'"></app-contact-form>
+      <app-contact-list [hidden]="hiddenComponent == 'form'"></app-contact-list>
     </div>
   </div>
 </div>
