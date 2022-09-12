@@ -7,8 +7,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@Configuration
+@Configuration 
 public class AppConfig {
+
     private Logger logger = Logger.getLogger(AppConfig.class.getName());
     
     @Value("${cors.pathMapping}")
@@ -21,6 +22,6 @@ public class AppConfig {
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         logger.info("CORS.Mapping: " + pathMapping + ". CORS.Origins: " + origins);
-        return new CorsConfig(pathMapping, origins);
+        return new CORSConfig(pathMapping, origins);
     }
 }

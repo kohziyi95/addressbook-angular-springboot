@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,13 +21,15 @@ import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
 
 @RestController
+// @CrossOrigin(origins="*")
 @RequestMapping(path = "api/addressbook", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AddressbookRestController {
     Logger logger = Logger.getLogger(AddressbookRestController.class.getName());
 
     @PostMapping(value = "save", consumes = MediaType.APPLICATION_JSON_VALUE )
+    // @CrossOrigin(origins="*")
     public ResponseEntity<String> addContact(@RequestBody String payload){
-        
+        // logger.info("Saving contact >>>>> "+ payload.toString() );
 
         JsonReader jsonReader = Json.createReader(new StringReader(payload));
         JsonObject jsonObject = jsonReader.readObject();

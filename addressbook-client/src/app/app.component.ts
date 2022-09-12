@@ -1,3 +1,5 @@
+import { AddressbookService } from './services/contact.service';
+import { Contact } from './models';
 import { Component } from '@angular/core';
 
 @Component({
@@ -8,15 +10,27 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'addressbook-client';
 
-  hiddenComponent: string = 'form';
+  constructor(private svc: AddressbookService){}
+
+  shownComponent: string = 'form';
 
   toggleFormComponent() {
-    this.hiddenComponent ='form';
-    console.info('current component: ', this.hiddenComponent);
+    this.shownComponent ='form';
+    console.info('current component: ', this.shownComponent);
   }
 
   toggleListComponent() {
-    this.hiddenComponent = 'list';
-    console.info('current component: ', this.hiddenComponent);
+    this.shownComponent = 'list';
+    console.info('current component: ', this.shownComponent);
+  }
+
+  saveContact(contact: Contact){
+    console.info("Saving Contact >>>>", contact);
+    this.svc.saveContact(contact).then(result => {
+      console.info('>>>> result: ', result)
+    }).catch(error => {
+      console.error('>>>> error: ', error)
+    })
+    this.toggleListComponent();
   }
 }

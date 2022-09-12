@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Contact } from './../../models';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-contact-form',
@@ -34,8 +36,12 @@ export class ContactFormComponent implements OnInit {
     });
   }
 
+  @Output()
+  onAddContact = new Subject<Contact>();
+
   processForm() {
     console.info('Submitting Contact Form >>>>> ', this.contactForm.value);
+    this.onAddContact.next(this.contactForm.value as Contact);
     this.contactForm = this.createForm();
   }
 
