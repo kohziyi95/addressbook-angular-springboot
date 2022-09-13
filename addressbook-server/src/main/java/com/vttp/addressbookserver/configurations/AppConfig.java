@@ -30,17 +30,17 @@ public class AppConfig {
         return new CorsConfig(pathMapping, origins);
     }
 
-    @Bean
-    public FilterRegistrationBean corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.setAllowedOrigins(Collections.singletonList("*"));
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
-        source.registerCorsConfiguration("/**", config);
-        FilterRegistrationBean<CorsFilter> filterRegistration = new FilterRegistrationBean<>(new CorsFilter(source));
-        filterRegistration.setOrder(Ordered.HIGHEST_PRECEDENCE);
-        return filterRegistration;
-    }
+    // @Bean
+    // public FilterRegistrationBean corsFilter() {
+    //     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    //     CorsConfiguration config = new CorsConfiguration();
+    //     config.setAllowCredentials(true);
+    //     config.setAllowedOrigins(Collections.singletonList("*"));
+    //     config.addAllowedHeader("*");
+    //     config.addAllowedMethod("*");
+    //     source.registerCorsConfiguration("/**", config);
+    //     FilterRegistrationBean<CorsFilter> filterRegistration = new FilterRegistrationBean<>(new CorsFilter(source));
+    //     filterRegistration.setOrder(Ordered.HIGHEST_PRECEDENCE);
+    //     return filterRegistration;
+    // }
 }
