@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 
-const ADDRESSBOOK_URL = 'http://localhost:8080/api/addressbook/';
+// const ADDRESSBOOK_URL = 'http://localhost:8080/api/addressbook/';
+const ADDRESSBOOK_URL = "http://vttpaddressbook.herokuapp.com/";
 
 @Injectable()
 export class AddressbookService {
