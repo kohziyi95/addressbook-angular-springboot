@@ -22,6 +22,6 @@ public class AppConfig {
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         logger.info("CORS.Mapping: " + pathMapping + ". CORS.Origins: " + origins);
-        return new CORSConfig(pathMapping, origins);
+        return new CorsConfig(pathMapping, origins);
     }
 }
