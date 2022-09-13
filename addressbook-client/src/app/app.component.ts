@@ -1,36 +1,51 @@
+import { ContactListComponent } from './components/contact-list/contact-list.component';
 import { AddressbookService } from './services/contact.service';
 import { Contact } from './models';
-import { Component } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'addressbook-client';
 
-  constructor(private svc: AddressbookService){}
+  constructor(private svc: AddressbookService) {}
 
   shownComponent: string = 'form';
 
+  @ViewChild('contactList')
+  contactList!: ContactListComponent;
+
+  showAllContacts() {
+    this.contactList.showContact();
+  }
+
+  ngOnInit(): void {
+  }
+
   toggleFormComponent() {
-    this.shownComponent ='form';
-    console.info('current component: ', this.shownComponent);
+    this.shownComponent = 'form';
+    // console.info('current component: ', this.shownComponent);
   }
 
   toggleListComponent() {
+    this.showAllContacts();
     this.shownComponent = 'list';
-    console.info('current component: ', this.shownComponent);
+    // console.info('current component: ', this.shownComponent);
   }
 
-  saveContact(contact: Contact){
-    console.info("Saving Contact >>>>", contact);
-    this.svc.saveContact(contact).then(result => {
-      console.info('>>>> result: ', result)
-    }).catch(error => {
-      console.error('>>>> error: ', error)
-    })
-    this.toggleListComponent();
+  async saveContact(contact: Contact) {
+    console.info('Saving Contact >>>>', contact);
+    await this.svc
+      .saveContact(contact)
+      .then((result) => {
+        console.info('>>>> result: ', result);
+        this.toggleListComponent();
+      })
+      .catch((error) => {
+        console.error('>>>> error: ', error);
+      });
   }
 }

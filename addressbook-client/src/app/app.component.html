@@ -16,7 +16,7 @@
   <div class="row mt-3">
     <div class="col">
       <app-contact-form [hidden]="shownComponent == 'list'" (onAddContact)="saveContact($event)"></app-contact-form>
-      <app-contact-list [hidden]="shownComponent == 'form'"></app-contact-list>
+      <app-contact-list #contactList [hidden]="shownComponent == 'form'"></app-contact-list>
     </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 import { Contact, Response } from './../models';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 
@@ -32,4 +32,17 @@ export class AddressbookService {
   //   );
   // }
 
+  getAllContacts() {
+    const headers = new HttpHeaders().set('Accept', 'application/json');
+    return this.http.get<Response>(ADDRESSBOOK_URL + 'listContacts', {
+      headers,
+    });
+  }
+
+  deleteContact(id: string) {
+    const headers = new HttpHeaders().set('Accept', 'application/json');
+    return this.http.post(ADDRESSBOOK_URL + 'delete', { "id": id }, {
+      headers,
+    });
+  }
 }
