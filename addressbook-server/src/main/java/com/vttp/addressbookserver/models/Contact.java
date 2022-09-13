@@ -1,9 +1,14 @@
 package com.vttp.addressbookserver.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 
+@Entity
 public class Contact {
+    @Id
     private String id;
     private String name;
     private String email;
