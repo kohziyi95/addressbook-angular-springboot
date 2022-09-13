@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vttp.addressbookserver.models.Contact;
@@ -32,7 +35,6 @@ public class AddressbookRestController {
 
     @Autowired
     private ContactRepo repo;
-
 
     @PostMapping(value = "save", consumes = MediaType.APPLICATION_JSON_VALUE )
     // @CrossOrigin(origins="*")
@@ -65,7 +67,7 @@ public class AddressbookRestController {
         return ResponseEntity.status(HttpStatus.CREATED).body(resp.toJson().toString());
     }
 
-    @GetMapping(value = "listContacts", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "listContacts")
     public ResponseEntity<String> getAllContacts(){
         Iterable<Contact> allContacts =  repo.findAll();
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
@@ -75,5 +77,30 @@ public class AddressbookRestController {
         JsonArray contactsArray = arrayBuilder.build();
 
         return ResponseEntity.ok(contactsArray.toString());
+    }
+
+    @DeleteMapping(value = "delete", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> deleteById(@RequestBody String payload){
+
+        JsonReader jsonReader = Json.createReader(new StringReader(payload));
+        JsonObject jsonObject = jsonReader.readObject();
+        String id = jsonObject.getString("id");
+
+        Response resp;
+
+        try {
+            repo.deleteById(id);
+        } catch (IllegalArgumentException e) {
+            resp = new Response();
+            resp.setCode(400);
+            resp.setMessage(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(resp.toJson().toString());
+        }
+
+        resp = new Response();
+        resp.setCode(200);
+        resp.setMessage("Contact with ID: %s deleted.".formatted(id));
+
+        return ResponseEntity.ok().body(resp.toJson().toString());
     }
 }
