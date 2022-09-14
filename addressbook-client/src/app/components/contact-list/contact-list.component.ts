@@ -18,7 +18,7 @@ export class ContactListComponent implements OnInit {
 
   showContact() {
     this.svc.getAllContacts().subscribe((data) => {
-      return (this.contactList = data as any);
+      return (this.contactList = JSON.parse(data.data));
     });
     console.info('Contact list >>>> ', this.contactList);
   }

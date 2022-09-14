@@ -1,5 +1,7 @@
 package com.vttp.addressbookserver.models;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -7,7 +9,7 @@ import jakarta.json.Json;
 import jakarta.json.JsonObject;
 
 @Entity
-public class Contact {
+public class Contact implements Serializable {
     @Id
     private String id;
     private String name;
