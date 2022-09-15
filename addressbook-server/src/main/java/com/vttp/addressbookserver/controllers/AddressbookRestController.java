@@ -80,7 +80,7 @@ public class AddressbookRestController {
         }
         JsonArray contactsArray = arrayBuilder.build();
         Response resp = new Response();
-        resp.setCode(201);
+        resp.setCode(200);
         resp.setMessage("Number of contacts retrieved: %s".formatted(contactsArray.size()));
         resp.setData(contactsArray.asJsonArray().toString());
 
